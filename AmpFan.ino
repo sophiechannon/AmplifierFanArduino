@@ -10,6 +10,8 @@ int amber = 10;
 int red = 11;
 
 void setup() {
+//  might need this?
+//  Serial.begin(int);
   pinMode (fan, OUTPUT);
   pinMode (green, OUTPUT);
   pinMode (amber, OUTPUT);
