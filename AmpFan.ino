@@ -1,13 +1,19 @@
-// Currently set up to work with pot, not a thermal sensor
+#include "max6675.h"
+
 int currentTemp;
 bool fanStatus = false;
-int upperThreshold = 600;
-int lowerThreshold = 350;
-int overHeatingThreshold = 900;
-int fan = 5;
+int upperThreshold = 30;
+int lowerThreshold = 25;
+int overHeatingThreshold = 32;
+int fan = 3;
 int green = 9;
 int amber = 10;
 int red = 11;
+int thermoDO = 4;
+int thermoCS = 5;
+int thermoCLK = 6;
+
+MAX6675 thermocouple(thermoCLK, thermoCS, thermoDO);
 
 void setup() {
   Serial.begin(9600);
@@ -15,13 +21,16 @@ void setup() {
   pinMode (green, OUTPUT);
   pinMode (amber, OUTPUT);
   pinMode (red, OUTPUT);
+  delay(500);
 }
 
 void loop() {
 //  thermal sensor will be connected to A0 input
-  Serial.println(analogRead(A0));
-  currentTemp = analogRead(A0); 
+  Serial.print(thermocouple.readCelsius());
+  Serial.println(" c");
+  currentTemp = thermocouple.readCelsius(); 
   reactToTemperatureChange();
+  delay(1000);
 }
 
 void turnOnFan() {
