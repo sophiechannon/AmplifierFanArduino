@@ -2,9 +2,9 @@
 
 int currentTemp;
 bool fanStatus = false;
-int upperThreshold = 30;
-int lowerThreshold = 25;
-int overHeatingThreshold = 32;
+int upperThreshold = 20;
+int lowerThreshold = 18;
+int overHeatingThreshold = 22;
 int fan = 3;
 int green = 9;
 int amber = 10;
@@ -25,7 +25,6 @@ void setup() {
 }
 
 void loop() {
-//  thermal sensor will be connected to A0 input
   Serial.print(thermocouple.readCelsius());
   Serial.println(" c");
   currentTemp = thermocouple.readCelsius(); 
